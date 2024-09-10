@@ -1,0 +1,39 @@
+conda config --remove channels https://mirrors.aliyun.com/anaconda/pkgs/main/
+conda config --remove channels https://mirrors.aliyun.com/anaconda/pkgs/free/
+conda config --remove channels https://mirrors.aliyun.com/anaconda/cloud/conda-forge/
+
+vim /root/.condarc
+
+channels:
+  - defaults
+show_channel_urls: true
+default_channels:
+  - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main
+  - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/r
+  - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/msys2
+custom_channels:
+  conda-forge: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud
+  msys2: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud
+  bioconda: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud
+  menpo: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud
+  pytorch: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud
+  simpleitk: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud
+
+conda config --remove-key channels
+
+conda create -n graph python==3.7.6
+conda activate graph
+cd GraphSVX-master
+pip install -r requirements.txt
+pip install torch_cluster-latest+cu102-cp37-cp37m-linux_x86_64.whl
+pip install torch_scatter-latest+cu102-cp37-cp37m-linux_x86_64.whl
+pip install torch_sparse-latest+cu102-cp37-cp37m-linux_x86_64.whl
+pip install scanpy
+
+wget https://data.pyg.org/whl/torch-1.6.0/torch_cluster-latest%2Bcpu-cp37-cp37m-linux_x86_64.whl
+wget https://data.pyg.org/whl/torch-1.6.0/torch_scatter-latest%2Bcpu-cp37-cp37m-linux_x86_64.whl
+wget https://data.pyg.org/whl/torch-1.6.0/torch_sparse-latest%2Bcpu-cp37-cp37m-linux_x86_64.whl
+
+pip install torch_cluster-latest+cpu-cp37-cp37m-linux_x86_64.whl
+pip install torch_scatter-latest+cpu-cp37-cp37m-linux_x86_64.whl
+pip install torch_sparse-latest+cpu-cp37-cp37m-linux_x86_64.whl
